@@ -1,0 +1,7 @@
+{
+  "name": "konkamon-ionic-vue",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue-vite"
+}
