@@ -14,4 +14,3 @@ Ionic + Vue Application, Work in the same way as Angular Version but in Vue.JS 3
 3. Run `npm install` in this Project Folder
 4. Run `ionic serve` in this Project Folder
 
-##
