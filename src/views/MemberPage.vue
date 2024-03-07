@@ -6,21 +6,26 @@
       </ion-toolbar>
     </ion-header>
     <ion-content :fullscreen="true">
-      <ion-list>
-        <ion-list-header>
-          <ion-title>รายชื่อสมาชิก</ion-title>
-        </ion-list-header>
-        <ion-item-sliding v-for="data in a" :key="data">
-          <ion-item>
-            <ion-label>{{ data }}</ion-label>
-          </ion-item>
-
-          <ion-item-options>
-            <ion-item-option>Favorite</ion-item-option>
-            <ion-item-option color="danger">Delete</ion-item-option>
-          </ion-item-options>
-        </ion-item-sliding>
-      </ion-list>
+      <ion-grid>
+        <ion-row class="ion-justify-content-center">
+          <ion-col size="12" size-lg="6">
+            <ion-list>
+              <ion-list-header>
+                <ion-title>รายชื่อสมาชิก</ion-title>
+              </ion-list-header>
+              <ion-item-sliding v-for="data in a" :key="data">
+                <ion-item>
+                  <ion-label>{{ data }}</ion-label>
+                </ion-item>
+                <ion-item-options>
+                  <ion-item-option>Favorite</ion-item-option>
+                  <ion-item-option color="danger">Delete</ion-item-option>
+                </ion-item-options>
+              </ion-item-sliding>
+            </ion-list>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     </ion-content>
     <ion-fab slot="fixed" vertical="top" horizontal="end">
       <ion-fab-button color="tertiary" id="open-modal">
@@ -71,6 +76,9 @@ import {
   IonItem,
   IonLabel,
   IonListHeader,
+  IonGrid,
+  IonCol,
+  IonRow,
 } from "@ionic/vue";
 import { close, personAdd } from "ionicons/icons";
 import { ref } from "vue";
