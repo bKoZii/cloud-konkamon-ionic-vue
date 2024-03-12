@@ -1,11 +1,13 @@
 # cloud-konkamon-ionic-vue
 
-Ionic + Vue Application, Work in the same way as Angular Version but in Vue.JS 3!
+![Vue.js](https://img.shields.io/badge/vuejs-%2335495e.svg?style=for-the-badge&logo=vuedotjs&logoColor=%234FC08D)![Ionic](https://img.shields.io/badge/Ionic-%233880FF.svg?style=for-the-badge&logo=Ionic&logoColor=white)![Firebase](https://img.shields.io/badge/firebase-a08021?style=for-the-badge&logo=firebase&logoColor=ffcd34)
+
+Ionic + Vue Application, ทำงานแบบเดียวกับเวอร์ชั่น Angular แต่ใช้ Vue.js 3!
 
 ## Angular and Vue versions
 
-- Vue: https://github.com/bKoZii/cloud-konkamon-ionic-vue
-- Angular: https://github.com/bKoZii/cloud-konkamon-ionic
+- Vue: <https://github.com/bKoZii/cloud-konkamon-ionic-vue>
+- Angular: <https://github.com/bKoZii/cloud-konkamon-ionic>
 
 ## How to run
 
