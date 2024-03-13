@@ -1,5 +1,5 @@
 <template>
-  <ion-page ref="page">
+  <ion-page ref="page" id="memberPage">
     <ion-header>
       <ion-toolbar color="primary" mode="ios">
         <ion-title>สมาชิก</ion-title>
@@ -8,60 +8,38 @@
     <ion-content :fullscreen="true">
       <ion-grid>
         <ion-row class="ion-justify-content-center">
-          <ion-col size="12" size-lg="6">
+          <ion-col size="12" size-lg="6" size-md="10">
             <ion-list>
               <ion-list-header>
-                <ion-title>รายชื่อสมาชิก</ion-title>
+                <ion-title class="ion-text-center">รายชื่อสมาชิก</ion-title>
               </ion-list-header>
-              <ion-item-sliding v-for="data in a" :key="data">
+              <ion-item-sliding v-for="data in memberData" :key="data.id">
                 <ion-item>
-                  <ion-label>{{ data }}</ion-label>
+                  <ion-label>{{ data.title + " " + data.fName + " " + data.lName }}</ion-label>
                 </ion-item>
                 <ion-item-options>
-                  <ion-item-option>Favorite</ion-item-option>
-                  <ion-item-option color="danger">Delete</ion-item-option>
+                  <ion-item-option><ion-icon :icon="create"></ion-icon></ion-item-option>
+                  <ion-item-option color="danger" @click="delMember(data)"><ion-icon :icon="trashBin"
+                      color="light"></ion-icon></ion-item-option>
                 </ion-item-options>
               </ion-item-sliding>
             </ion-list>
+            <ion-label color="tertiary">(ดึงข้อมูลจาก Firestore)</ion-label>
           </ion-col>
         </ion-row>
       </ion-grid>
     </ion-content>
     <ion-fab slot="fixed" vertical="top" horizontal="end">
-      <ion-fab-button color="tertiary" id="open-modal">
+      <ion-fab-button color="tertiary" @click="openAddMemberModal()">
         <ion-icon :icon="personAdd"></ion-icon>
       </ion-fab-button>
     </ion-fab>
-    <ion-modal
-      ref="modal"
-      trigger="open-modal"
-      :can-dismiss="canDismiss"
-      :presenting-element="page.$el"
-      mode="ios"
-    >
-      <ion-header>
-        <ion-toolbar>
-          <ion-title>เพิ่มข้อมูลสมาชิก</ion-title>
-          <ion-buttons slot="end">
-            <ion-button @click="dismiss">
-              <ion-icon :icon="close"></ion-icon
-            ></ion-button>
-          </ion-buttons>
-        </ion-toolbar>
-      </ion-header>
-      <ion-content class="ion-padding ion-text-center">
-        <ion-title>Coming Soon...</ion-title>
-      </ion-content>
-    </ion-modal>
   </ion-page>
 </template>
 
 <script setup lang="ts">
 import {
   IonFab,
-  IonButton,
-  IonButtons,
-  IonModal,
   IonFabButton,
   IonIcon,
   IonPage,
@@ -74,22 +52,70 @@ import {
   IonItemOptions,
   IonItemOption,
   IonItem,
-  IonLabel,
   IonListHeader,
   IonGrid,
   IonCol,
   IonRow,
+  IonLabel,
+  alertController,
+  modalController,
 } from "@ionic/vue";
-import { close, personAdd } from "ionicons/icons";
+import { create, personAdd, trashBin } from "ionicons/icons";
 import { ref } from "vue";
+import { deleteMember, memberRef } from "@/firebaseConfig";
+import { useCollection } from "vuefire";
+import addMemberModal from "@/components/addMemberModal.vue";
+import { memberToast } from "@/utilFunctions";
 
-const a: string[] = ["นาย กรกมล ศรีอ่อน", "นาย พรี่บิ๊ก จ้า", "นาย ใครหว่า"];
 const page = ref(IonPage);
-const modal = ref(IonModal);
+const memberData = useCollection(memberRef, { wait: true });
 
-function dismiss() {
-  modal.value.$el.dismiss();
-}
+const openAddMemberModal = async () => {
+  const modal = await modalController.create({
+    component: addMemberModal,
+    presentingElement: document.getElementById("memberPage") as HTMLElement,
+    canDismiss: canDismiss,
+  });
+  modal.present();
+};
+
+// const retrieveData = () => {
+//   const unsubscribe = onSnapshot(itemsQuery, (snapshot: any) => {
+//     const changes = snapshot.docChanges();
+//     changes.forEach((change: any) => {
+//       if (change.type === 'added') {
+//         memberList.value.push(change.doc.data());
+//       }
+//       // Handle other types of changes if necessary
+//     });
+//   });
+//   memberToast("d")
+// }
+
+const delMember = async (data: any) => {
+  const alert = await alertController.create({
+    mode: "ios",
+    header: "ลบข้อมูลสมาชิก",
+    subHeader: "คุณต้องการลบข้อมูลสมาชิกนี้หรือไม่?",
+    message: data.title + " " + data.fName + " " + data.lName,
+    buttons: [
+      {
+        text: "ยกเลิก",
+        role: "cancel",
+      },
+      {
+        text: "ยืนยัน",
+        role: "destructive",
+        handler: () => {
+          deleteMember(data.id).then(async () => {
+            await memberToast("ลบข้อมูลสมาชิกสำเร็จ");
+          });
+        },
+      },
+    ],
+  });
+  alert.present();
+};
 
 async function canDismiss(data?: any, role?: string) {
   return role !== "gesture";
