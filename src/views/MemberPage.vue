@@ -75,6 +75,7 @@ const openAddMemberModal = async () => {
     component: addMemberModal,
     presentingElement: document.getElementById("memberPage") as HTMLElement,
     canDismiss: canDismiss,
+    mode: "ios"
   });
   modal.present();
 };
@@ -107,9 +108,13 @@ const delMember = async (data: any) => {
         text: "ยืนยัน",
         role: "destructive",
         handler: () => {
-          deleteMember(data.id).then(async () => {
-            await memberToast("ลบข้อมูลสมาชิกสำเร็จ");
-          });
+          deleteMember(data.id)
+            .then(async (message) => {
+              await memberToast(message);
+            })
+            .catch(async (error) => {
+              await memberToast(error.message);
+            });
         },
       },
     ],

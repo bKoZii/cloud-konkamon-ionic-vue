@@ -1,7 +1,4 @@
 <template>
-
-  <!-- <ion-modal ref="modal" :can-dismiss="canDismiss" :presenting-element="page.$el" mode="ios"
-      :keep-contents-mounted="false"> -->
   <ion-header>
     <ion-toolbar>
       <ion-title>เพิ่มข้อมูลสมาชิก</ion-title>
@@ -47,10 +44,7 @@
     <ion-button expand="block" class="ion-margin-top" @click="sendData()"
       :disabled="!member.fName || !member.lName">บันทึก</ion-button>
     <ion-button expand="block" :disabled="isMemberDataEmpty" @click="clearMember()">Reset Form</ion-button>
-
-
   </ion-content>
-  <!-- </ion-modal> -->
 </template>
 <script setup lang="ts">
 import { addMember } from "@/firebaseConfig";
@@ -92,17 +86,19 @@ const customAlertOptions = {
 
 const sendData = async () => {
   member.value.dateAdded = Timestamp.now().toMillis().toString()
-  const memberObject = member.value; // แปลงจาก Ref ของ Vue ให้เป็น Object ของ JavaScript
+  const memberObject: Object = member.value; // แปลงจาก Ref ของ Vue ให้เป็น Object ของ JavaScript
 
   dialogDismiss();
 
   try {
-    addMember({ ...memberObject }).then(async () => {
-      await memberToast("เพิ่มข้อมูลสมาชิกสำเร็จ");
+    await addMember({ ...memberObject }).then(async (message: string) => {
+      await memberToast(message);
+    }).catch(async (error: string) => {
+      await memberToast("ERROR: " + error);
     });
   } catch (e: any) {
     console.error("Error Adding Member: ", e);
-    await memberToast(e)
+    await memberToast("ERROR: " + e.message)
   }
 };
 
