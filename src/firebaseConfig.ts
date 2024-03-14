@@ -5,23 +5,21 @@ import { env } from "./env/env";
 
 export const firebaseApp = initializeApp(env.firebase);
 
-
 const db = getFirestore(firebaseApp);
 export const memberRef = collection(db, 'members');
 
 export const addMember = async (data: any) => {
   try {
-    await addDoc(memberRef, { ...data });
-  } catch (e) {
+    await addDoc(memberRef, {...data});
+  } catch (e:any) {
     console.error("Error adding document: ", e);
   }
 };
 
 export const deleteMember = async (id: any) => {
   try {
-    await deleteDoc(doc(memberRef, id))
-  } catch (e) {
+    await deleteDoc(doc(memberRef,id))
+  } catch (e:any) {
     console.error("Error adding document: ", e);
-    console.log(id);
   }
 }
