@@ -37,42 +37,18 @@
         label-placement="floating"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-input label="Line ID" type="text" v-model="member.lineID" fill="outline" label-placement="floating"
+      <ion-input label="Line ID" type="text" v-model="member.lineID" label-placement="floating"
         placeholder="กรุณาป้อนข้อมูล"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-textarea label="ที่อยู่" placeholder="กรุณาป้อนข้อมูล" label-placement="floating"></ion-textarea>
+      <ion-textarea label="ที่อยู่" placeholder="กรุณาป้อนข้อมูล" label-placement="floating"
+        v-model="member.address"></ion-textarea>
     </ion-item>
     <ion-button expand="block" class="ion-margin-top" @click="sendData()"
       :disabled="!member.fName || !member.lName">บันทึก</ion-button>
     <ion-button expand="block" :disabled="isMemberDataEmpty" @click="clearMember()">Reset Form</ion-button>
 
-    <ion-card>
-      <ion-card-header>
-        <h3>Two-Way Binding Test{{ member.dateAdded }}
-        </h3>
-      </ion-card-header>
-      <ion-card-content>
-        <ion-list>
-          <ion-item>
-            <ion-label>ชื่อเต็ม</ion-label>
-            {{ member.title + " " + member.fName + " " + member.lName }}
-          </ion-item>
-          <ion-item>
-            <ion-label>E-Mail</ion-label>
-            {{ member.email }}
-          </ion-item>
-          <ion-item>
-            <ion-label>เบอร์โทร</ion-label>
-            {{ member.phone }}
-          </ion-item>
-          <ion-item>
-            <ion-label>LINE ID</ion-label>
-            {{ member.lineID }}
-          </ion-item>
-        </ion-list>
-      </ion-card-content>
-    </ion-card>
+
   </ion-content>
   <!-- </ion-modal> -->
 </template>
@@ -80,9 +56,6 @@
 import { addMember } from "@/firebaseConfig";
 import { memberToast } from "@/utilFunctions";
 import {
-  IonCard,
-  IonCardContent,
-  IonCardHeader,
   IonButton,
   IonButtons,
   IonIcon,
@@ -90,10 +63,8 @@ import {
   IonToolbar,
   IonTitle,
   IonContent,
-  IonList,
   IonItem,
   IonInput,
-  IonLabel,
   IonSelect,
   IonSelectOption,
   IonTextarea,
@@ -110,6 +81,7 @@ const member = ref({
   lineID: "",
   email: "",
   phone: "",
+  address: "",
   dateAdded: ""
 });
 const customAlertOptions = {
