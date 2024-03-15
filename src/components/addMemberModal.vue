@@ -10,8 +10,8 @@
   </ion-header>
   <ion-content class="ion-padding">
     <ion-item>
-      <ion-select label="คำนำหน้า" value="นาย" v-model="member.title" cancel-text="ยกเลิก" ok-text="บันทึก"
-        justify="space-between" :interface-options="customAlertOptions">
+      <ion-select label="คำนำหน้า" v-model="member.title" cancel-text="ยกเลิก" ok-text="บันทึก" justify="space-between"
+        :interface-options="customAlertOptions" label-placement="floating">
         <ion-select-option value="นาย" aria-selected="true">นาย</ion-select-option>
         <ion-select-option value="นาง">นาง</ion-select-option>
         <ion-select-option value="นางสาว">นางสาว</ion-select-option>
@@ -69,7 +69,7 @@ import { computed, ref } from 'vue';
 import { Timestamp } from "firebase/firestore";
 
 const member = ref({
-  title: "",
+  title: "นาย",
   fName: "",
   lName: "",
   lineID: "",
@@ -81,7 +81,6 @@ const member = ref({
 const customAlertOptions = {
   header: 'คำนำหน้า',
   subHeader: 'กรุณาเลือกเพียงหนึ่งรายการ',
-  translucent: true,
 };
 
 const sendData = async () => {
