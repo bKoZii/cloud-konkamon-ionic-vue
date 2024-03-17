@@ -1,6 +1,6 @@
 <template>
   <ion-page ref="page" id="memberPage">
-    <ion-header>
+    <ion-header id="memberHeader">
       <ion-toolbar color="primary" mode="ios">
         <ion-title>สมาชิก</ion-title>
       </ion-toolbar>
@@ -8,7 +8,7 @@
     <ion-content :fullscreen="true">
       <ion-grid>
         <ion-row class="ion-justify-content-center">
-          <ion-col size="12" size-lg="6" size-md="10">
+          <ion-col size="12" size-lg="5" size-md="10">
             <ion-list>
               <ion-list-header>
                 <ion-title class="ion-text-center">รายชื่อสมาชิก</ion-title>
@@ -24,19 +24,29 @@
                 </ion-item-options>
               </ion-item-sliding>
             </ion-list>
-            <ion-label color="tertiary">(ดึงข้อมูลจาก Firestore)</ion-label>
+            <ion-note>(ดึงข้อมูลจาก Firestore)</ion-note>
           </ion-col>
         </ion-row>
       </ion-grid>
+      <ion-fab slot="fixed" vertical="top" horizontal="end" :edge="true">
+        <ion-fab-button color="tertiary" @click="openAddMemberModal()">
+          <ion-icon :icon="personAdd"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
     </ion-content>
-    <ion-fab slot="fixed" vertical="top" horizontal="end">
-      <ion-fab-button color="tertiary" @click="openAddMemberModal()">
-        <ion-icon :icon="personAdd"></ion-icon>
-      </ion-fab-button>
-    </ion-fab>
   </ion-page>
 </template>
+<style scoped>
+ion-item-option {
+  width: 3em;
 
+}
+
+ion-item-option ion-icon {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+</style>
 <script setup lang="ts">
 import {
   IonFab,
@@ -57,6 +67,7 @@ import {
   IonCol,
   IonRow,
   IonLabel,
+  IonNote,
   alertController,
   modalController,
 } from "@ionic/vue";
