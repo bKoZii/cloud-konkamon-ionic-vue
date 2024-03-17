@@ -72,10 +72,10 @@ import {
   modalController,
 } from "@ionic/vue";
 import { create, personAdd, trashBin } from "ionicons/icons";
-import { ref } from "vue";
+import { defineAsyncComponent, ref } from "vue";
 import { deleteMember, memberRef } from "@/firebaseConfig";
 import { useCollection } from "vuefire";
-import addMemberModal from "@/components/addMemberModal.vue";
+const addMemberModal = defineAsyncComponent(() => import("@/components/addMemberModal.vue"));
 import { memberToast } from "@/utilFunctions";
 
 const page = ref(IonPage);
