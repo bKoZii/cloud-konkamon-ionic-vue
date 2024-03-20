@@ -85,15 +85,15 @@ const memberData = useCollection(memberRef, { wait: true });
 const router = useIonRouter();
 
 const openModal = async (modalComponent: any, props?: {}) => {
-  const modal = await modalController.create({
+  const modalOptions: any = {
     component: modalComponent,
-    componentProps: {
-      member: props || undefined
-    },
     presentingElement: document.getElementById("memberPage") as HTMLElement,
     canDismiss: canDismiss,
-    mode: "ios"
-  });
+  };
+  if (props) {
+    modalOptions.componentProps = { member: props };
+  }
+  const modal = await modalController.create(modalOptions);
   modal.present();
 };
 
