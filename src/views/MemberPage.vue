@@ -18,7 +18,8 @@
                   <ion-label>{{ data.title + " " + data.fName + " " + data.lName }}</ion-label>
                 </ion-item>
                 <ion-item-options>
-                  <ion-item-option><ion-icon :icon="create"></ion-icon></ion-item-option>
+                  <ion-item-option @click="openModal(editMemberModal, data)"><ion-icon
+                      :icon="create"></ion-icon></ion-item-option>
                   <ion-item-option color="danger" @click="delMember(data)"><ion-icon :icon="trashBin"
                       color="light"></ion-icon></ion-item-option>
                 </ion-item-options>
@@ -82,7 +83,6 @@ const editMemberModal = defineAsyncComponent(() => import("@/components/editMemb
 import { memberToast } from "@/utilFunctions";
 const page = ref(IonPage);
 const memberData = useCollection(memberRef, { wait: true });
-const router = useIonRouter();
 
 const openModal = async (modalComponent: any, props?: {}) => {
   const modalOptions: any = {
