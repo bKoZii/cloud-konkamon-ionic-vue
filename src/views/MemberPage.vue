@@ -14,7 +14,7 @@
                 <ion-title class="ion-text-center">รายชื่อสมาชิก</ion-title>
               </ion-list-header>
               <ion-item-sliding v-for="data in memberData" :key="data.id">
-                <ion-item>
+                <ion-item @click="openModal(memberDetailModal, data)">
                   <ion-label>{{ data.title + " " + data.fName + " " + data.lName }}</ion-label>
                 </ion-item>
                 <ion-item-options>
@@ -29,7 +29,7 @@
         </ion-row>
       </ion-grid>
       <ion-fab slot="fixed" vertical="top" horizontal="end" :edge="true">
-        <ion-fab-button color="tertiary" @click="openAddMemberModal()">
+        <ion-fab-button color="tertiary" @click="openModal(addMemberModal)">
           <ion-icon :icon="personAdd"></ion-icon>
         </ion-fab-button>
       </ion-fab>
@@ -70,20 +70,26 @@ import {
   IonNote,
   alertController,
   modalController,
+  useIonRouter,
 } from "@ionic/vue";
 import { create, personAdd, trashBin } from "ionicons/icons";
 import { defineAsyncComponent, ref } from "vue";
 import { deleteMember, memberRef } from "@/firebaseConfig";
 import { useCollection } from "vuefire";
 const addMemberModal = defineAsyncComponent(() => import("@/components/addMemberModal.vue"));
+const memberDetailModal = defineAsyncComponent(() => import("@/components/memberDetailModal.vue"));
+const editMemberModal = defineAsyncComponent(() => import("@/components/editMemberModal.vue"));
 import { memberToast } from "@/utilFunctions";
-
 const page = ref(IonPage);
 const memberData = useCollection(memberRef, { wait: true });
+const router = useIonRouter();
 
-const openAddMemberModal = async () => {
+const openModal = async (modalComponent: any, props?: {}) => {
   const modal = await modalController.create({
-    component: addMemberModal,
+    component: modalComponent,
+    componentProps: {
+      member: props || undefined
+    },
     presentingElement: document.getElementById("memberPage") as HTMLElement,
     canDismiss: canDismiss,
     mode: "ios"
