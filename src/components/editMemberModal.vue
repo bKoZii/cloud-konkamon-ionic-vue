@@ -47,6 +47,7 @@
 </template>
 <script setup lang="ts">
 import { updateMember } from "@/firebaseConfig";
+import { MemberInterface } from "@/memberInterface";
 import { memberToast } from "@/utilFunctions";
 import {
   IonButton,
@@ -66,12 +67,15 @@ import {
 import { close } from "ionicons/icons";
 import { computed, ref } from "vue";
 
-const props = defineProps({
-  member: Object,
+const memberProps = defineProps({
+  member: {
+    type: Object as () => MemberInterface,
+    required: true,
+  },
 });
 
 const member = ref({
-  ...props.member,
+  ...memberProps.member,
 });
 
 const oldMember = ref({ ...member.value });

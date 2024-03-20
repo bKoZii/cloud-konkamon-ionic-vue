@@ -30,7 +30,7 @@
         label-placement="floating"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-input label="เบอร์โทร" type="tel" v-model="member.phone" placeholder="กรุณาป้อนข้อมูล"
+      <ion-input label="เบอร์โทร" type="tel" v-model="member.phoneNum" placeholder="กรุณาป้อนข้อมูล"
         label-placement="floating"></ion-input>
     </ion-item>
     <ion-item>
@@ -67,23 +67,25 @@ import {
 import { close } from "ionicons/icons";
 import { computed, ref } from 'vue';
 import { Timestamp } from "firebase/firestore";
+import { MemberInterface } from "@/memberInterface";
 
+const memberProps = defineProps({
+  member: {
+    type: Object as () => MemberInterface,
+    required: true,
+  },
+})
 const member = ref({
-  title: "นาย",
-  fName: "",
-  lName: "",
-  lineID: "",
-  email: "",
-  phone: "",
-  address: "",
-  dateAdded: ""
-});
+  ...memberProps.member
+})
+
 const customAlertOptions = {
   header: 'คำนำหน้า',
   subHeader: 'กรุณาเลือกเพียงหนึ่งรายการ',
 };
 
 const sendData = async () => {
+  member.value.id = ""
   member.value.dateAdded = Timestamp.now().toMillis().toString()
   const memberObject: Object = member.value; // แปลงจาก Ref ของ Vue ให้เป็น Object ของ JavaScript
 
