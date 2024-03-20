@@ -9,6 +9,13 @@ Ionic + Vue Application, ทำงานแบบเดียวกับเว�
 - Vue: <https://github.com/bKoZii/cloud-konkamon-ionic-vue>
 - Angular: <https://github.com/bKoZii/cloud-konkamon-ionic>
 
+## Todos
+
+- [x] CRUD Function
+- [x] More Detail Modal
+- [ ] Mini Project
+- [ ] Form / Input Validations
+
 ## How to run
 
 1. Install the Ionic CLI `npm install -g @ionic/cli`
