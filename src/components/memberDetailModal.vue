@@ -18,7 +18,7 @@
           </ion-text>
         </ion-label>
         <ion-label>
-          <ion-note color="medium">ชื่อเต็ม</ion-note><br />
+          <ion-note color="medium">ชื่อ</ion-note><br />
           <ion-text>
             {{ member.fName }}
           </ion-text>
@@ -82,18 +82,12 @@ import {
   modalController,
 } from "@ionic/vue";
 import { close } from "ionicons/icons";
-import { ref } from "vue";
+import { toRefs } from "vue";
 
-const memberProps = defineProps({
-  member: {
-    type: Object as () => MemberInterface,
-    required: true,
-  },
-});
-
-const member = ref({
-  ...memberProps.member,
-});
+const memberProp = defineProps<{
+  member: MemberInterface
+}>()
+const { member } = toRefs(memberProp)
 
 const dialogDismiss = () => modalController.dismiss();
 </script>

@@ -45,7 +45,7 @@
       :disabled="isMemberUnchanged">บันทึก</ion-button>
   </ion-content>
 </template>
-<script setup lang="ts">
+<script setup lang="ts" generic="T extends string">
 import { updateMember } from "@/firebaseConfig";
 import { MemberInterface } from "@/memberInterface";
 import { memberToast } from "@/utilFunctions";
@@ -65,18 +65,12 @@ import {
   modalController,
 } from "@ionic/vue";
 import { close } from "ionicons/icons";
-import { computed, ref } from "vue";
+import { computed, ref, toRefs } from "vue";
 
-const memberProps = defineProps({
-  member: {
-    type: Object as () => MemberInterface,
-    required: true,
-  },
-});
-
-const member = ref({
-  ...memberProps.member,
-});
+const memberProp = defineProps<{
+  member: MemberInterface
+}>()
+const { member } = toRefs(memberProp)
 
 const oldMember = ref({ ...member.value });
 
