@@ -7,6 +7,5 @@ export interface MemberInterface {
   lineID: string;
   address: string;
   dateAdded: string;
-  id: string;
-  [key: string]: any;
+  [id: string]: any;
 }
