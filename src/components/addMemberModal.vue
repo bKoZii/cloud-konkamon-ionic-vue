@@ -69,25 +69,15 @@ import { computed, ref } from 'vue';
 import { Timestamp } from "firebase/firestore";
 import { MemberInterface } from "@/memberInterface";
 
-const memberProps = defineProps({
-  member: {
-    type: Object as () => MemberInterface,
-    required: true,
-  },
-})
-const member = ref({
-  ...memberProps.member
-})
-
+const member = ref<MemberInterface>({} as unknown as MemberInterface)
 const customAlertOptions = {
   header: 'คำนำหน้า',
   subHeader: 'กรุณาเลือกเพียงหนึ่งรายการ',
 };
 
 const sendData = async () => {
-  member.value.id = ""
   member.value.dateAdded = Timestamp.now().toMillis().toString()
-  const memberObject: Object = member.value; // แปลงจาก Ref ของ Vue ให้เป็น Object ของ JavaScript
+  const memberObject: object = member.value; // แปลงจาก Ref ของ Vue ให้เป็น Object ของ JavaScript
 
   dialogDismiss();
 
@@ -117,7 +107,7 @@ const clearMember = () => {
 };
 
 const isMemberDataEmpty = computed(() => {
-  return Object.values(member.value).every((value) => value.trim() === "");
+  return Object.values(member.value).every((value: any) => value.trim() === "");
 });
 
 </script>
