@@ -82,12 +82,7 @@ import {
   modalController,
 } from "@ionic/vue";
 import { close } from "ionicons/icons";
-import { toRefs } from "vue";
 
-const memberProp = defineProps<{
-  member: MemberInterface
-}>()
-const { member } = toRefs(memberProp)
-
+const { member } = defineProps<{ member: MemberInterface }>();
 const dialogDismiss = () => modalController.dismiss();
 </script>
