@@ -45,7 +45,7 @@
       :disabled="isMemberUnchanged">บันทึก</ion-button>
   </ion-content>
 </template>
-<script setup lang="ts" generic="T extends string">
+<script setup lang="ts">
 import { updateMember } from "@/firebaseConfig";
 import { MemberInterface } from "@/memberInterface";
 import { memberToast } from "@/utilFunctions";
@@ -84,10 +84,9 @@ const customAlertOptions = {
 };
 
 const updateData = async () => {
-  const memberObject: Object = member.value;
   dialogDismiss();
   try {
-    await updateMember(member.value.id, memberObject)
+    await updateMember(member.value.id, member.value)
       .then(async (message: string) => {
         await memberToast(message);
       })
