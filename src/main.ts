@@ -28,12 +28,9 @@ import "@ionic/vue/css/display.css";
 import "./theme/variables.css";
 
 const app = createApp(App).use(IonicVue).use(router);
-// app.component("ion-content", IonContent);
-// app.component("ion-page", IonPage);
-// app.component("ion-header", IonHeader);
-// app.component("ion-toolbar", IonToolbar);
+
 app.use(VueFire, {
-  firebaseApp
+  firebaseApp,
 });
 router.isReady().then(() => {
   app.mount("#app");
