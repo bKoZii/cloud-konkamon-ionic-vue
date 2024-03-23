@@ -77,12 +77,11 @@ const customAlertOptions = {
 
 const sendData = async () => {
   member.value.dateAdded = Timestamp.now().toMillis().toString()
-  const memberObject: object = member.value; // แปลงจาก Ref ของ Vue ให้เป็น Object ของ JavaScript
 
   dialogDismiss();
 
   try {
-    await addMember({ ...memberObject }).then(async (message: string) => {
+    await addMember({ ...member.value }).then(async (message: string) => {
       await memberToast(message);
     }).catch(async (error: string) => {
       await memberToast("ERROR: " + error);
