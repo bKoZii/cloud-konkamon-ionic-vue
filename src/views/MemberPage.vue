@@ -71,7 +71,6 @@ import {
   IonNote,
   alertController,
   modalController,
-  useIonRouter,
 } from "@ionic/vue";
 import { create, personAdd, trashBin } from "ionicons/icons";
 import { defineAsyncComponent, ref } from "vue";
@@ -84,25 +83,21 @@ import { memberToast } from "@/utilFunctions";
 const page = ref(IonPage);
 const memberData = useCollection(memberRef, { wait: true });
 
-const openModal = async (modalComponent: any, props?: {}) => {
-  const modalOptions: any = {
+const openModal = async (modalComponent?: any, props?: object) => {
+  const memberModal = await modalController.create({
     component: modalComponent,
-    presentingElement: document.getElementById("memberPage") as HTMLElement,
-    canDismiss: canDismiss,
-  };
-  if (props) {
-    modalOptions.componentProps = { member: props };
-  }
-  const modal = await modalController.create(modalOptions);
-  modal.present();
-};
+    componentProps: props ? { member: props } : undefined,
+    canDismiss: canDismiss
+  })
+  memberModal.present();
+}
 
 // const retrieveData = () => {
 //   const unsubscribe = onSnapshot(itemsQuery, (snapshot: any) => {
 //     const changes = snapshot.docChanges();
 //     changes.forEach((change: any) => {
 //       if (change.type === 'added') {
-//         memberList.value.push(change.doc.data());
+//         member.value.push(change.doc.data());
 //       }
 //       // Handle other types of changes if necessary
 //     });
@@ -130,7 +125,7 @@ const delMember = async (data: any) => {
               await memberToast(message);
             })
             .catch(async (error) => {
-              await memberToast(error.message);
+              await memberToast(error.message, 'danger');
             });
         },
       },
