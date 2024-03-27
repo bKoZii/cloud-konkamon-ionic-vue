@@ -1,4 +1,4 @@
-export interface MemberInterface {
+export type MemberInterface = {
   title: string;
   fName: string;
   lName: string;
@@ -8,4 +8,4 @@ export interface MemberInterface {
   address: string;
   dateAdded: string;
   [id: string]: any;
-}
+};
