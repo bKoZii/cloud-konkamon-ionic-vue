@@ -5,7 +5,6 @@ import {
   addDoc,
   deleteDoc,
   doc,
-  getDoc,
   updateDoc,
 } from "firebase/firestore";
 import { env } from "./env/env";
@@ -40,14 +39,5 @@ export const updateMember = async (id: any, data: any): Promise<string> => {
   } catch (e: any) {
     console.error("Error Updating document: ", e);
     throw new Error("Error: " + e.message);
-  }
-};
-export const getOneMember = async (id: any) => {
-  try {
-    await (
-      await getDoc(doc(memberRef, id))
-    ).id;
-  } catch (e: any) {
-    console.error(e);
   }
 };
