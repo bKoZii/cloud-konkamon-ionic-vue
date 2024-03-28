@@ -8,57 +8,29 @@
       </ion-buttons>
     </ion-toolbar>
   </ion-header>
-  <ion-content>
-    <ion-list :inset="true">
+  <ion-content class="ion-padding">
+    <ion-list>
       <ion-item>
+        <ion-icon :icon="person" slot="start"></ion-icon>
         <ion-label>
-          <ion-note color="medium">คำนำหน้า</ion-note><br />
-          <ion-text>
-            {{ member.title }}
-          </ion-text>
-        </ion-label>
-        <ion-label>
-          <ion-note color="medium">ชื่อ</ion-note><br />
-          <ion-text>
-            {{ member.fName }}
-          </ion-text>
-        </ion-label>
-        <ion-label>
-          <ion-note color="medium">นามสกุล</ion-note><br />
-          <ion-text>
-            {{ member.lName }}
-          </ion-text>
+          {{ member.title + " " + member.fName + " " + member.lName }}
         </ion-label>
       </ion-item>
       <ion-item>
-        <ion-label>
-          <ion-note color="medium">อีเมลล์</ion-note><br />
-          <ion-text>
-            {{ member.email }}
-          </ion-text>
-        </ion-label>
+        <ion-icon aria-hidden="true" :icon="mail" slot="start"></ion-icon>
+        <ion-label>{{ member.email }}</ion-label>
       </ion-item>
       <ion-item>
-        <ion-label>
-          <ion-note color="medium">เบอร์โทรศัพท์</ion-note><br />
-          <ion-text>
-            {{ member.phoneNum }}
-          </ion-text>
-        </ion-label>
-        <ion-label>
-          <ion-note color="medium">LINE ID</ion-note><br />
-          <ion-text>
-            {{ member.lineID }}
-          </ion-text>
-        </ion-label>
+        <ion-icon :icon="call" slot="start"></ion-icon>
+        <ion-label>{{ member.phoneNum }}</ion-label>
       </ion-item>
       <ion-item>
-        <ion-label>
-          <ion-note color="medium">ที่อยู่</ion-note><br />
-          <ion-text>
-            {{ member.address }}
-          </ion-text>
-        </ion-label>
+        <ion-icon src="/logoLine.svg" slot="start"></ion-icon>
+        <ion-label>{{ member.lineID }}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-icon :icon="home" slot="start"></ion-icon>
+        <ion-label>{{ member.address }}</ion-label>
       </ion-item>
     </ion-list>
   </ion-content>
@@ -74,15 +46,20 @@ import {
   IonList,
   IonItem,
   IonLabel,
-  IonText,
-  IonNote,
   IonButtons,
   IonButton,
   IonIcon,
   modalController,
 } from "@ionic/vue";
-import { close } from "ionicons/icons";
+
+import { close, home, mail, person, call } from "ionicons/icons";
 
 const { member } = defineProps<{ member: MemberInterface }>();
 const dialogDismiss = () => modalController.dismiss();
+
 </script>
+<style>
+ion-icon {
+  color: var(--ion-color-primary)
+}
+</style>
