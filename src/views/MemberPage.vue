@@ -71,6 +71,7 @@ import {
   IonNote,
   alertController,
   modalController,
+  isPlatform,
 } from "@ionic/vue";
 import { create, personAdd, trashBin } from "ionicons/icons";
 import { defineAsyncComponent, ref } from "vue";
@@ -87,7 +88,8 @@ const openModal = async (modalComponent?: any, props?: object) => {
   const memberModal = await modalController.create({
     component: modalComponent,
     componentProps: props ? { member: props } : undefined,
-    canDismiss: canDismiss
+    canDismiss: canDismiss,
+    presentingElement: isPlatform('ios') ? page.value.$el as HTMLElement : undefined
   })
   memberModal.present();
 }
