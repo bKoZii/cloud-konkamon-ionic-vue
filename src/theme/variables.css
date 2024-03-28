@@ -4,31 +4,37 @@ http://ionicframework.com/docs/theming/ */
 @font-face {
   font-family: "Nunito Sans";
   font-weight: 400;
+  font-display: swap;
   src: url(/fonts/NunitoSans_400.woff2) format("woff2");
 }
 @font-face {
   font-family: "Nunito Sans";
   font-weight: 600;
+  font-display: swap;
   src: url(/fonts/NunitoSans_600.woff2) format("woff2");
 }
 @font-face {
   font-family: "Nunito Sans";
   font-weight: 800;
+  font-display: swap;
   src: url(/fonts/NunitoSans_800.woff2) format("woff2");
 }
 @font-face {
   font-family: "Noto Sans Thai Looped";
   font-weight: 400;
+  font-display: swap;
   src: url(/fonts/NotoSansThaiLooped_400.woff2) format("woff2");
 }
 @font-face {
   font-family: "Noto Sans Thai Looped";
   font-weight: 600;
+  font-display: swap;
   src: url(/fonts/NotoSansThaiLooped_600.woff2) format("woff2");
 }
 @font-face {
   font-family: "Noto Sans Thai Looped";
   font-weight: 800;
+  font-display: swap;
   src: url(/fonts/NotoSansThaiLooped_800.woff2) format("woff2");
 }
 
