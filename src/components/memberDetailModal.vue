@@ -58,7 +58,7 @@ const { member } = defineProps<{ member: MemberInterface }>();
 const dialogDismiss = () => modalController.dismiss();
 
 </script>
-<style>
+<style scoped>
 ion-icon {
   color: var(--ion-color-primary)
 }
