@@ -10,20 +10,7 @@
         <ion-row class="ion-justify-content-center">
           <ion-col size="12" size-lg="5" size-md="10">
             <ion-list>
-              <ion-list-header>
-                <ion-title class="ion-text-center">รายชื่อสมาชิก</ion-title>
-              </ion-list-header>
-              <ion-item-sliding v-for="data in memberData" :key="data.id">
-                <ion-item @click="openModal(memberDetailModal, data)">
-                  <ion-label>{{ data.title + " " + data.fName + " " + data.lName }}</ion-label>
-                </ion-item>
-                <ion-item-options>
-                  <ion-item-option @click="openModal(editMemberModal, data)"><ion-icon
-                      :icon="create"></ion-icon></ion-item-option>
-                  <ion-item-option color="danger" @click="delMember(data)"><ion-icon :icon="trashBin"
-                      color="light"></ion-icon></ion-item-option>
-                </ion-item-options>
-              </ion-item-sliding>
+              <MemberList v-for="data in memberData" :key="data.id" :data="data" />
             </ion-list>
             <ion-note>(ดึงข้อมูลจาก Firestore)</ion-note>
           </ion-col>
@@ -59,84 +46,18 @@ import {
   IonTitle,
   IonContent,
   IonList,
-  IonItemSliding,
-  IonItemOptions,
-  IonItemOption,
-  IonItem,
-  IonListHeader,
   IonGrid,
   IonCol,
   IonRow,
-  IonLabel,
   IonNote,
-  alertController,
-  modalController,
-  isPlatform,
 } from "@ionic/vue";
-import { create, personAdd, trashBin } from "ionicons/icons";
-import { defineAsyncComponent, ref } from "vue";
-import { deleteMember, memberRef } from "@/firebaseConfig";
+import { personAdd } from "ionicons/icons";
+import { defineAsyncComponent } from 'vue';
+import { memberRef } from "@/firebaseConfig";
 import { useCollection } from "vuefire";
 const addMemberModal = defineAsyncComponent(() => import("@/components/addMemberModal.vue"));
-const memberDetailModal = defineAsyncComponent(() => import("@/components/memberDetailModal.vue"));
-const editMemberModal = defineAsyncComponent(() => import("@/components/editMemberModal.vue"));
-import { memberToast } from "@/utilFunctions";
-const page = ref(IonPage);
+const MemberList = defineAsyncComponent(() => import("@/components/memberList.vue"))
+import { openModal } from "@/utilFunctions";
+
 const memberData = useCollection(memberRef, { wait: true });
-
-const openModal = async (modalComponent?: any, props?: object) => {
-  const memberModal = await modalController.create({
-    component: modalComponent,
-    componentProps: props ? { member: props } : undefined,
-    canDismiss: canDismiss,
-    presentingElement: isPlatform('ios') ? page.value.$el as HTMLElement : undefined
-  })
-  memberModal.present();
-}
-
-// const retrieveData = () => {
-//   const unsubscribe = onSnapshot(itemsQuery, (snapshot: any) => {
-//     const changes = snapshot.docChanges();
-//     changes.forEach((change: any) => {
-//       if (change.type === 'added') {
-//         member.value.push(change.doc.data());
-//       }
-//       // Handle other types of changes if necessary
-//     });
-//   });
-//   memberToast("d")
-// }
-
-const delMember = async (data: any) => {
-  const alert = await alertController.create({
-    mode: "ios",
-    header: "ลบข้อมูลสมาชิก",
-    subHeader: "คุณต้องการลบข้อมูลสมาชิกนี้หรือไม่?",
-    message: data.title + " " + data.fName + " " + data.lName,
-    buttons: [
-      {
-        text: "ยกเลิก",
-        role: "cancel",
-      },
-      {
-        text: "ยืนยัน",
-        role: "destructive",
-        handler: () => {
-          deleteMember(data.id)
-            .then(async (message) => {
-              await memberToast(message);
-            })
-            .catch(async (error) => {
-              await memberToast(error.message, 'danger');
-            });
-        },
-      },
-    ],
-  });
-  alert.present();
-};
-
-async function canDismiss(data?: any, role?: string) {
-  return role !== "gesture";
-}
 </script>
