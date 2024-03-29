@@ -10,7 +10,8 @@
         <ion-row class="ion-justify-content-center">
           <ion-col size="12" size-lg="5" size-md="10">
             <ion-list>
-              <MemberList v-for="data in memberData" :key="data.id" :data="data" />
+              <ion-title class="ion-text-center">รายชื่อสมาชิก</ion-title>
+              <MemberList v-for="data in memberObject" :key="data.id" :data="data" />
             </ion-list>
             <ion-note>(ดึงข้อมูลจาก Firestore)</ion-note>
           </ion-col>
@@ -52,12 +53,20 @@ import {
   IonNote,
 } from "@ionic/vue";
 import { personAdd } from "ionicons/icons";
-import { defineAsyncComponent } from 'vue';
+import { computed, defineAsyncComponent } from 'vue';
 import { memberRef } from "@/firebaseConfig";
 import { useCollection } from "vuefire";
 const addMemberModal = defineAsyncComponent(() => import("@/components/addMemberModal.vue"));
 const MemberList = defineAsyncComponent(() => import("@/components/memberList.vue"))
 import { openModal } from "@/utilFunctions";
-
+import { MemberInterface } from "@/memberInterface";
+// import { MemberInterface } from "@/memberInterface";
 const memberData = useCollection(memberRef, { wait: true });
+
+const memberObject = computed(() => {
+  return memberData.value.map(doc => ({
+    ...doc,
+  }) as MemberInterface);
+});
+
 </script>
