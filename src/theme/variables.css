@@ -2,40 +2,40 @@
 http://ionicframework.com/docs/theming/ */
 
 @font-face {
-  font-family: "Nunito Sans";
+  font-family: "MiSans";
+  font-weight: 500;
+  font-display: swap;
+  src: url(/fonts/MiSansLatin-Medium.woff2) format("woff2");
+}
+@font-face {
+  font-family: "MiSans";
   font-weight: 400;
   font-display: swap;
-  src: url(/fonts/NunitoSans_400.woff2) format("woff2");
+  src: url(/fonts/MiSansLatin-Normal.woff2) format("woff2");
 }
 @font-face {
-  font-family: "Nunito Sans";
+  font-family: "MiSans";
   font-weight: 600;
   font-display: swap;
-  src: url(/fonts/NunitoSans_600.woff2) format("woff2");
+  src: url(/fonts/MiSansLatin-Bold.woff2) format("woff2");
 }
 @font-face {
-  font-family: "Nunito Sans";
-  font-weight: 800;
-  font-display: swap;
-  src: url(/fonts/NunitoSans_800.woff2) format("woff2");
-}
-@font-face {
-  font-family: "Noto Sans Thai Looped";
+  font-family: "MiSans Thai";
   font-weight: 400;
   font-display: swap;
-  src: url(/fonts/NotoSansThaiLooped_400.woff2) format("woff2");
+  src: url(/fonts/MiSansThai-Medium.woff2) format("woff2");
 }
 @font-face {
-  font-family: "Noto Sans Thai Looped";
+  font-family: "MiSans Thai";
+  font-weight: 500;
+  font-display: swap;
+  src: url(/fonts/MiSansThai-Normal.woff2) format("woff2");
+}
+@font-face {
+  font-family: "MiSans Thai";
   font-weight: 600;
   font-display: swap;
-  src: url(/fonts/NotoSansThaiLooped_600.woff2) format("woff2");
-}
-@font-face {
-  font-family: "Noto Sans Thai Looped";
-  font-weight: 800;
-  font-display: swap;
-  src: url(/fonts/NotoSansThaiLooped_800.woff2) format("woff2");
+  src: url(/fonts/MiSansThai-Bold.woff2) format("woff2");
 }
 
 /** Ionic CSS Variables **/
@@ -265,7 +265,7 @@ html {
   /* For more information on dynamic font scaling, visit the documentation: 
   https://ionicframework.com/docs/layout/dynamic-font-scaling */
   --ion-dynamic-font: var(--ion-default-dynamic-font);
-  --ion-font-family: "Nunito Sans", "Noto Sans Thai Looped";
+  --ion-font-family: "MiSans", "MiSans Thai";
 }
 
 ion-title {
