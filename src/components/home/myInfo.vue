@@ -9,7 +9,8 @@
       <ion-card-content>
         <p>นักศึกษา มหาวิทยาลัยเทคโนโลยีราชมงคลศรีวิชัย คณะวิทยาศาสตร์และเทคโนโลยี แผนกเทคโนโลยีสารสนเทศ</p>
       </ion-card-content>
-      <ion-button fill="clear" href="https://github.com/bKoZii"><ion-icon :icon="logoGithub"></ion-icon></ion-button>
+      <ion-button fill="clear" @click="personalInfoModal"><ion-icon :icon="person"
+          slot="start"></ion-icon>ข้อมูลส่วนตัว</ion-button>
     </ion-card>
   </div>
 </template>
@@ -22,7 +23,16 @@ import {
   IonCardTitle,
   IonCardSubtitle,
   IonButton,
-  IonIcon
+  IonIcon,
+  modalController
 } from "@ionic/vue";
-import { logoGithub } from "ionicons/icons";
+import { person } from "ionicons/icons";
+import { defineAsyncComponent } from 'vue';
+const myPersonalInfo = defineAsyncComponent(() => import("@/components/home/myPersonalInfo.vue"))
+const personalInfoModal = async () => {
+  const modal = await modalController.create({
+    component: myPersonalInfo
+  })
+  modal.present()
+}
 </script>
