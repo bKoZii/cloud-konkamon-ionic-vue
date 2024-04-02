@@ -34,6 +34,10 @@
       </ion-item>
     </ion-list>
   </ion-content>
+  <ion-footer>
+    <ion-note color="medium">Member ID: {{ member.id }}</ion-note><br />
+    <ion-note color="medium">วันที่เพิ่มข้อมูล: {{ dateAdded }}</ion-note>
+  </ion-footer>
 </template>
 
 <script setup lang="ts">
@@ -49,6 +53,8 @@ import {
   IonButtons,
   IonButton,
   IonIcon,
+  IonFooter,
+  IonNote,
   modalController,
 } from "@ionic/vue";
 
@@ -57,9 +63,14 @@ import { close, home, mail, person, call } from "ionicons/icons";
 const { member } = defineProps<{ member: MemberInterface }>();
 const dialogDismiss = () => modalController.dismiss();
 
+const dateAdded = member.dateAdded ? new Date(parseInt(member.dateAdded)).toLocaleString() : "Not Found";
 </script>
 <style scoped>
 ion-icon {
   color: var(--ion-color-primary)
+}
+
+ion-footer {
+  padding: 0.5rem;
 }
 </style>
