@@ -12,18 +12,17 @@
 </template>
 <script setup lang="ts">
 import { IonItem, IonItemSliding, IonLabel, IonItemOptions, IonItemOption, alertController, IonIcon } from '@ionic/vue';
-import { openModal } from '../utilFunctions';
-// import { MemberInterface } from '../memberInterface';
 import { create, trashBin } from "ionicons/icons"
 import { defineAsyncComponent } from 'vue';
 import { deleteMember } from '@/firebaseConfig';
-import { memberToast } from '@/utilFunctions';
-const memberDetailModal = defineAsyncComponent(() => import("./memberDetailModal.vue"));
-const editMemberModal = defineAsyncComponent(() => import("./editMemberModal.vue"));
+import { memberToast, openModal } from '@/utilFunctions';
+import { MemberInterface } from '@/memberInterface';
+const memberDetailModal = defineAsyncComponent(() => import("@/components/memberDetailModal.vue"));
+const editMemberModal = defineAsyncComponent(() => import("@/components/editMemberModal.vue"));
 
-defineProps({
-  data: Object
-});
+defineProps<{
+  data: MemberInterface
+}>()
 
 const delMember = async (data: any) => {
   const alert = await alertController.create({
