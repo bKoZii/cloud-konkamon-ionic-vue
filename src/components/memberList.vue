@@ -26,7 +26,6 @@ defineProps<{
 
 const delMember = async (data: any) => {
   const alert = await alertController.create({
-    mode: "ios",
     header: "ลบข้อมูลสมาชิก",
     subHeader: "คุณต้องการลบข้อมูลสมาชิกนี้หรือไม่?",
     message: data.title + " " + data.fName + " " + data.lName,
