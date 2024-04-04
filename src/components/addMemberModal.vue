@@ -43,7 +43,8 @@
     </ion-item>
     <ion-button expand="block" class="ion-margin-top" @click="sendData()"
       :disabled="!member.fName || !member.lName">บันทึก</ion-button>
-    <ion-button expand="block" :disabled="isMemberDataEmpty" @click="clearMember()">Reset Form</ion-button>
+    <ion-button expand="block" :disabled="isMemberDataEmpty" fill="clear" @click="clearMember()">Reset
+      Form</ion-button>
   </ion-content>
 </template>
 <script setup lang="ts">
@@ -77,7 +78,6 @@ const customAlertOptions = {
 
 const sendData = async () => {
   member.value.dateAdded = Timestamp.now().toMillis().toString()
-
   dialogDismiss();
 
   try {
