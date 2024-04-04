@@ -32,6 +32,7 @@ import {
   IonButton,
   IonButtons,
   IonIcon,
+  IonItem,
   IonContent,
   modalController,
 } from "@ionic/vue";
