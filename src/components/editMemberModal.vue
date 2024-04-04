@@ -87,7 +87,7 @@ const customAlertOptions = {
 const updateData = async () => {
   dialogDismiss();
   try {
-    await updateMember(editedMember.value.id, editedMember.value)
+    await updateMember(memberProp.member.id, editedMember.value)
       .then(async (message: string) => {
         await memberToast(message);
       })
