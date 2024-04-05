@@ -29,6 +29,7 @@ import {
   IonItem,
   IonAccordion,
   IonAccordionGroup,
+  IonLabel
 } from "@ionic/vue";
 import { informationCircle, logoGithub, mail, people, person, school } from "ionicons/icons";
 </script>
