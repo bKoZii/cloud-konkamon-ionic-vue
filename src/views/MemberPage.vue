@@ -11,7 +11,9 @@
           <ion-col size="12" size-lg="5" size-md="10">
             <ion-list>
               <ion-title class="ion-text-center">รายชื่อสมาชิก</ion-title>
-              <MemberList v-for="data in memberData" :key="data.id" :data="data" />
+              <div v-for="data in memberData" :key="data.id">
+                <MemberList :data="data" />
+              </div>
             </ion-list>
             <ion-note>(ดึงข้อมูลจาก Firestore)</ion-note>
           </ion-col>
