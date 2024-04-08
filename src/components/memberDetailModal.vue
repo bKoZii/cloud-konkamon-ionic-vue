@@ -16,19 +16,19 @@
           {{ member.title + " " + member.fName + " " + member.lName }}
         </ion-label>
       </ion-item>
-      <ion-item>
+      <ion-item v-if="member.email">
         <ion-icon aria-hidden="true" :icon="mail" slot="start"></ion-icon>
         <ion-label>{{ member.email }}</ion-label>
       </ion-item>
-      <ion-item>
+      <ion-item v-if="member.phoneNum">
         <ion-icon :icon="call" slot="start"></ion-icon>
         <ion-label>{{ member.phoneNum }}</ion-label>
       </ion-item>
-      <ion-item>
+      <ion-item v-if="member.lineID">
         <ion-icon src="/logoLine.svg" slot="start"></ion-icon>
         <ion-label>{{ member.lineID }}</ion-label>
       </ion-item>
-      <ion-item>
+      <ion-item v-if="member.address">
         <ion-icon :icon="home" slot="start"></ion-icon>
         <ion-label>{{ member.address }}</ion-label>
       </ion-item>
