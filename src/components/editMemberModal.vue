@@ -76,7 +76,7 @@ const oldMember = ref({ ...editedMember.value });
 defineExpose({ editedMember });
 
 const isMemberUnchanged = computed(() => {
-  return Object.entries(editedMember.value).toString() === Object.entries(oldMember.value).toString()
+  return JSON.stringify(editedMember.value) === JSON.stringify(oldMember.value)
 });
 
 const customAlertOptions = {
