@@ -1,14 +1,17 @@
 <template>
-  <ion-item-sliding v-if="data">
-    <ion-item @click="openModal(memberDetailModal, data)">
-      <ion-label>{{ data.title + " " + data.fName + " " + data.lName }}</ion-label>
-    </ion-item>
-    <ion-item-options>
-      <ion-item-option @click="openModal(editMemberModal, data)"><ion-icon :icon="create"></ion-icon></ion-item-option>
-      <ion-item-option color="danger" @click="delMember(data)"><ion-icon :icon="trashBin"
-          color="light"></ion-icon></ion-item-option>
-    </ion-item-options>
-  </ion-item-sliding>
+  <div v-if="data">
+    <ion-item-sliding>
+      <ion-item @click="openModal(memberDetailModal, data)">
+        <ion-label>{{ data.title + " " + data.fName + " " + data.lName }}</ion-label>
+      </ion-item>
+      <ion-item-options>
+        <ion-item-option @click="openModal(editMemberModal, data)"><ion-icon
+            :icon="create"></ion-icon></ion-item-option>
+        <ion-item-option color="danger" @click="delMember(data)"><ion-icon :icon="trashBin"
+            color="light"></ion-icon></ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </div>
 </template>
 <script setup lang="ts">
 import { IonItem, IonItemSliding, IonLabel, IonItemOptions, IonItemOption, alertController, IonIcon } from '@ionic/vue';
