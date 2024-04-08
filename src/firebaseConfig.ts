@@ -8,12 +8,13 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import { env } from "./env/env";
+import { MemberInterface } from "./memberInterface";
 
 export const firebaseApp = initializeApp(env.firebase);
 
 const db = getFirestore(firebaseApp);
-export const memberRef = collection(db, "members");
-export const addMember = async (data: any): Promise<string> => {
+export const memberRef = collection(db, "members-test");
+export const addMember = async (data: MemberInterface): Promise<string> => {
   try {
     await addDoc(memberRef, data);
     return "เพิ่มข้อมูลสมาชิกสำเร็จ";
@@ -22,7 +23,7 @@ export const addMember = async (data: any): Promise<string> => {
   }
 };
 
-export const deleteMember = async (id: any): Promise<string> => {
+export const deleteMember = async (id: string): Promise<string> => {
   try {
     await deleteDoc(doc(memberRef, id));
     return "ลบข้อมูลสมาชิกสำเร็จ";
