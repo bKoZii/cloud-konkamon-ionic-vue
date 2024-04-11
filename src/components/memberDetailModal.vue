@@ -36,7 +36,7 @@
   </ion-content>
   <ion-footer>
     <ion-note color="medium">Member ID: {{ member.id }}</ion-note><br />
-    <ion-note color="medium">วันที่เพิ่มข้อมูล: {{ dateAdded }}</ion-note>
+    <ion-note color="medium">วันที่เพิ่มข้อมูล: {{ dateAdded }} - แก้ไขล่าสุด: {{ dateEdited }}</ion-note>
   </ion-footer>
 </template>
 
@@ -64,6 +64,7 @@ const { member } = defineProps<{ member: MemberInterface }>();
 const dialogDismiss = () => modalController.dismiss();
 
 const dateAdded = member.dateAdded ? new Date(parseInt(member.dateAdded)).toLocaleString() : "Not Found";
+const dateEdited = member.dateEdited ? new Date(parseInt(member.dateEdited)).toLocaleString() : "Not Found";
 </script>
 <style scoped>
 ion-icon {
