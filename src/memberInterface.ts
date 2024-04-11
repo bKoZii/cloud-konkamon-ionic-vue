@@ -1,4 +1,4 @@
-export type MemberInterface = {
+export interface MemberInterface {
   title: string;
   fName: string;
   lName: string;
@@ -7,5 +7,5 @@ export type MemberInterface = {
   lineID: string;
   address: string;
   dateAdded: string;
-  [id: string]: any;
-};
+  [id: string]: string;
+}
