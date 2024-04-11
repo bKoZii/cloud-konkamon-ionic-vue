@@ -64,6 +64,7 @@ import {
   IonTextarea,
   modalController,
 } from "@ionic/vue";
+import { Timestamp } from "firebase/firestore";
 import { close } from "ionicons/icons";
 import { computed, ref } from 'vue';
 
@@ -86,6 +87,7 @@ const customAlertOptions = {
 
 const updateData = async () => {
   dialogDismiss();
+  editedMember.value.dateEdited = Timestamp.now().toMillis().toString()
   try {
     await updateMember(memberProp.member.id, editedMember.value)
       .then(async (message: string) => {
