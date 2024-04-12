@@ -1,14 +1,14 @@
 <template>
   <div v-if="data">
     <ion-item-sliding>
-      <ion-item @click="openModal(memberDetailModal, data)">
+      <ion-item @click="openModal(memberDetailModal, data)" button :detail="true">
         <ion-label>{{ data.title + " " + data.fName + " " + data.lName }}</ion-label>
       </ion-item>
       <ion-item-options>
         <ion-item-option @click="openModal(editMemberModal, data)"><ion-icon
             :icon="create"></ion-icon></ion-item-option>
-        <ion-item-option color="danger" @click="delMember(data)"><ion-icon :icon="trashBin"
-            color="light"></ion-icon></ion-item-option>
+        <ion-item-option color="danger" @click="delMember(data)"><ion-icon
+            :icon="trashBin"></ion-icon></ion-item-option>
       </ion-item-options>
     </ion-item-sliding>
   </div>
