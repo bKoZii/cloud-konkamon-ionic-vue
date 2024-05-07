@@ -27,7 +27,7 @@ defineProps<{
   data: MemberInterface
 }>()
 
-const delMember = async (data: any) => {
+const delMember = async (data: MemberInterface) => {
   const alert = await alertController.create({
     header: "ลบข้อมูลสมาชิก",
     subHeader: "คุณต้องการลบข้อมูลสมาชิกนี้หรือไม่?",
