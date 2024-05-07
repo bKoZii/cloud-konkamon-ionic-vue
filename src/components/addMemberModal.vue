@@ -77,7 +77,7 @@ const customAlertOptions = {
 };
 
 const sendData = async () => {
-  member.value.dateAdded = Timestamp.now().toMillis().toString()
+  member.value.dateAdded = Timestamp.now().toMillis()
   dialogDismiss();
 
   try {
@@ -106,7 +106,7 @@ const clearMember = () => {
 };
 
 const isMemberDataEmpty = computed(() => {
-  return Object.values(member.value).every((value: any) => value.trim() === "");
+  return Object.values(member.value).every((value: string | number) => typeof value === 'string' && value.trim() === "");
 });
 
 </script>
